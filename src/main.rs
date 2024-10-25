@@ -4,6 +4,7 @@ mod social;
 mod config;
 
 use social::twitter::TwitterClient;
+use social::mastodon::MastodonClient;
 use social::SocialClient;
 
 #[derive(Parser, Debug)]
@@ -21,13 +22,24 @@ struct Args {
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = Args::parse();
     
-    match args.platform.as_str() {
+    // Join the message parts with spaces
+    let joined_message = args.message.join(" ");
+    
+    // Replace the newline token with actual newlines
+    let full_message = joined_message.replace("\\n", "\n");
+    
+    match args.platform.to_lowercase().as_str() {
         "twitter" => {
             let client = TwitterClient::new()?;
-            client.post(&args.message).await?;
+            client.post(&full_message).await?;
         },
-        // Future platforms will be added here
-        _ => println!("Unsupported platform: {}", args.platform),
+        "mastodon" => {
+            let client = MastodonClient::new()?;
+            client.post(&full_message).await?;
+        },
+        _ => {
+            return Err(format!("Unsupported platform: {}. Supported platforms are: twitter, mastodon", args.platform).into());
+        }
     }
 
     Ok(())

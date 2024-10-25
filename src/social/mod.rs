@@ -1,5 +1,6 @@
 // src/social/mod.rs
 pub mod twitter;
+pub mod mastodon;
 
 #[async_trait::async_trait]
 pub trait SocialClient {
