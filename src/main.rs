@@ -11,7 +11,7 @@ use social::SocialClient;
 #[command(author, version, about, long_about = None)]
 struct Args {
     /// The message to post
-    message: String,
+    message: Vec<String>,
 
     /// The platform to post to (twitter, mastodon, bluesky)
     #[arg(short, long, default_value = "twitter")]
