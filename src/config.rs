@@ -8,6 +8,7 @@ use std::io;
 pub struct Config {
     twitter: Option<TwitterConfig>,
     mastodon: Option<MastodonConfig>,
+    bluesky: Option<BlueskyConfig>,
 }
 
 #[derive(Deserialize)]
@@ -21,6 +22,13 @@ struct TwitterConfig {
 #[derive(Deserialize)]
 struct MastodonConfig {
     access_token: String,
+    instance_url: String,
+}
+
+#[derive(Deserialize)]
+struct BlueskyConfig {
+    identifier: String,
+    password: String,
     instance_url: String,
 }
 
@@ -73,6 +81,13 @@ instance_url = "https://mastodon.social"
                     Err("Mastodon configuration not found in config file".into())
                 }
             },
+            "bluesky" => {
+                if let Some(bluesky_config) = config.bluesky {
+                    Ok(PlatformConfig::Bluesky(bluesky_config))
+                } else {
+                    Err("Bluesky configuration not found in config file".into())
+                }
+            },
             _ => Err(format!("Unsupported platform: {}", platform).into())
         }
     }
@@ -89,6 +104,7 @@ instance_url = "https://mastodon.social"
 pub enum PlatformConfig {
     Twitter(TwitterConfig),
     Mastodon(MastodonConfig),
+    Bluesky(BlueskyConfig),
 }
 
 impl PlatformConfig {
@@ -109,7 +125,15 @@ impl PlatformConfig {
                     "instance_url" => Ok(config.instance_url.clone()),
                     _ => Err(format!("Unknown Mastodon config key: {}", key).into())
                 }
-            }
+            },
+            PlatformConfig::Bluesky(config) => {
+                match key {
+                    "identifier" => Ok(config.identifier.clone()),
+                    "password" => Ok(config.password.clone()),
+                    "instance_url" => Ok(config.instance_url.clone()),
+                    _ => Err(format!("Unknown Bluesky config key: {}", key).into())
+                }
+            },
         }
     }
 }

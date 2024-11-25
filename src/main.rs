@@ -5,6 +5,7 @@ mod config;
 
 use social::twitter::TwitterClient;
 use social::mastodon::MastodonClient;
+use social::bluesky::BlueskyClient;
 use social::SocialClient;
 
 #[derive(Parser, Debug)]
@@ -37,8 +38,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             let client = MastodonClient::new()?;
             client.post(&full_message).await?;
         },
+        "bluesky" => {
+            let client = BlueskyClient::new()?;
+            client.post(&full_message).await?;
+        },
         _ => {
-            return Err(format!("Unsupported platform: {}. Supported platforms are: twitter, mastodon", args.platform).into());
+            return Err(format!("Unsupported platform: {}. Supported platforms are: twitter, mastodon, bluesky", args.platform).into());
         }
     }
 
