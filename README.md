@@ -66,6 +66,12 @@ posterino "Hello, World!" --platform bluesky
 posterino "First line\nSecond line"
 ```
 
+### Post to All Platforms
+
+```bash
+posterino "Hello, everyone!" --all
+```
+
 ## Configuration
 
 Before using Posterino, you need to set up your configuration file. The first run will create a template configuration file at:
