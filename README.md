@@ -1,6 +1,6 @@
 # Posterino 🚀
 
-A powerful, command-line tool written in Rust for cross-posting to multiple social media platforms. Currently supports Twitter and Mastodon, with an extensible architecture for adding more platforms.
+A powerful, command-line tool written in Rust for cross-posting to multiple social media platforms. Currently supports Twitter, Mastodon and Bluesky with an extensible architecture for adding more platforms.
 
 ## Features
 
