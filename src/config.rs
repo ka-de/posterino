@@ -12,7 +12,7 @@ pub struct Config {
 }
 
 #[derive(Deserialize)]
-struct TwitterConfig {
+pub struct TwitterConfig {
     consumer_key: String,
     consumer_secret: String,
     access_token: String,
@@ -20,13 +20,13 @@ struct TwitterConfig {
 }
 
 #[derive(Deserialize)]
-struct MastodonConfig {
+pub struct MastodonConfig {
     access_token: String,
     instance_url: String,
 }
 
 #[derive(Deserialize)]
-struct BlueskyConfig {
+pub struct BlueskyConfig {
     identifier: String,
     password: String,
     instance_url: String,
