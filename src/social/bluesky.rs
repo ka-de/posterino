@@ -82,7 +82,7 @@ impl SocialClient for BlueskyClient {
         // Create the post
         let response = self.client
             .post(format!("{}/xrpc/com.atproto.repo.createRecord", self.instance_url))
-            .header("Authorization", format!("Bearer {}", access_jwt))
+            .header("Authorization", format!("Bearer {access_jwt}"))
             .json(&json!({
                 "repo": self.identifier,
                 "collection": "app.bsky.feed.post",

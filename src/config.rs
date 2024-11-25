@@ -88,13 +88,13 @@ instance_url = "https://mastodon.social"
                     Err("Bluesky configuration not found in config file".into())
                 }
             },
-            _ => Err(format!("Unsupported platform: {}", platform).into())
+            _ => Err(format!("Unsupported platform: {platform}").into())
         }
     }
 
     fn get_config_path() -> Result<PathBuf, Box<dyn std::error::Error>> {
         let mut path = dirs::config_dir()
-            .ok_or_else(|| "Could not find config directory")?;
+            .ok_or("Could not find config directory")?;
         path.push("posterino");
         path.push("config.toml");
         Ok(path)
@@ -116,14 +116,14 @@ impl PlatformConfig {
                     "consumer_secret" => Ok(config.consumer_secret.clone()),
                     "access_token" => Ok(config.access_token.clone()),
                     "access_token_secret" => Ok(config.access_token_secret.clone()),
-                    _ => Err(format!("Unknown Twitter config key: {}", key).into())
+                    _ => Err(format!("Unknown Twitter config key: {key}").into())
                 }
             },
             PlatformConfig::Mastodon(config) => {
                 match key {
                     "access_token" => Ok(config.access_token.clone()),
                     "instance_url" => Ok(config.instance_url.clone()),
-                    _ => Err(format!("Unknown Mastodon config key: {}", key).into())
+                    _ => Err(format!("Unknown Mastodon config key: {key}").into())
                 }
             },
             PlatformConfig::Bluesky(config) => {
@@ -131,7 +131,7 @@ impl PlatformConfig {
                     "identifier" => Ok(config.identifier.clone()),
                     "password" => Ok(config.password.clone()),
                     "instance_url" => Ok(config.instance_url.clone()),
-                    _ => Err(format!("Unknown Bluesky config key: {}", key).into())
+                    _ => Err(format!("Unknown Bluesky config key: {key}").into())
                 }
             },
         }

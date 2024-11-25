@@ -39,17 +39,17 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
         // Try Twitter
         if let Err(e) = post_to_platform("twitter", &full_message).await {
-            errors.push(format!("Twitter error: {}", e));
+            errors.push(format!("Twitter error: {e}"));
         }
 
         // Try Mastodon
         if let Err(e) = post_to_platform("mastodon", &full_message).await {
-            errors.push(format!("Mastodon error: {}", e));
+            errors.push(format!("Mastodon error: {e}"));
         }
 
         // Try Bluesky
         if let Err(e) = post_to_platform("bluesky", &full_message).await {
-            errors.push(format!("Bluesky error: {}", e));
+            errors.push(format!("Bluesky error: {e}"));
         }
 
         // If there were any errors, report them
@@ -88,7 +88,7 @@ async fn post_to_platform(platform: &str, message: &str) -> Result<(), Box<dyn s
             let client = BlueskyClient::new()?;
             client.post(message).await?;
         },
-        _ => return Err(format!("Unsupported platform: {}", platform).into()),
+        _ => return Err(format!("Unsupported platform: {platform}").into()),
     }
     Ok(())
 }
