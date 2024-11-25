@@ -28,6 +28,12 @@ cargo build --release
 
 The binary will be available at `target/release/posterino`
 
+### Installing via Cargo on Windows with build-std
+
+```bash
+cargo install -Z build-std --target x86_64-pc-windows-msvc --path .
+```
+
 ## Usage
 
 ### Basic Command Structure
