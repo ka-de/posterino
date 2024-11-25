@@ -89,9 +89,11 @@ consumer_key = "your_twitter_consumer_key"
 consumer_secret = "your_twitter_consumer_secret"
 access_token = "your_twitter_access_token"
 access_token_secret = "your_twitter_access_token_secret"
+
 [mastodon]
 access_token = "your_mastodon_access_token"
 instance_url = "https://mastodon.social"
+
 [bluesky]
 identifier = "your.handle@bsky.social"
 password = "your_app_password"
